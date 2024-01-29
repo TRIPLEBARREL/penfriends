@@ -1,10 +1,5 @@
 "use client";
 
-// global: header?
-// shop: design, implement products and stickers, design timer and price
-// stickers: can reuse stickers on letters for sale stickers here
-// products: wait for real data
-
 import React from "react";
 
 const ShopPage = () => {
@@ -12,35 +7,29 @@ const ShopPage = () => {
   const products = [
     {
       id: 1,
-      name: "Postcard Background",
-      price: 20,
+      name: "Hyundai i30N",
+      price: 45,
       originalPrice: 40,
-      image: "/postcard.png", // Replace with real images
+      image: "/product1.png", // Replace with real images
       isOnSale: true,
     },
     {
       id: 2,
-      name: "Home Background",
-      price: 130,
-      image: "/home-background.png", // Replace with real images
+      name: "Lexus IS350 Sport",
+      price: 30,
+      image: "/product2.png", // Replace with real images
     },
     {
       id: 3,
-      name: "Exclusive Stamp",
-      price: 240,
-      image: "/stamp.png", // Replace with real images
+      name: "Volkswagen GTI mk6",
+      price: 65,
+      image: "/product3.jpeg", // Replace with real images
     },
     {
       id: 4,
-      name: "Exclusive Badge",
-      price: 130,
-      image: "/badge.png", // Replace with real images
-    },
-    {
-      id: 5,
-      name: "Home Background",
-      price: 130,
-      image: "/wood-background.png", // Replace with real images
+      name: "Mustang GT",
+      price: 60,
+      image: "/product4.jpeg", // Replace with real images
     },
   ];
 
@@ -76,7 +65,7 @@ const ShopPage = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="rounded-md shadow-md w-300 h-30 object-cover"
+                className="rounded-md shadow-md w-300 h-30 object-cover z50"
               />
               {product.isOnSale && (
                 <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -86,7 +75,11 @@ const ShopPage = () => {
             </div>
 
             {/* Shelf */}
-            <img src="/shelf.png" alt="shelf image" className="w-400 h-40" />
+            <img
+              src="/shelf.png"
+              alt="shelf image"
+              className="w-400 h-40 z30"
+            />
 
             {/* Product Name */}
             <h2
