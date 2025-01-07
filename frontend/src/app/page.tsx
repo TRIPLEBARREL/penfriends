@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className={`container mx-auto`}>
+    <div className={`container mx-auto w-screen h-screen`}>
       <div className={`mt-10`}>
         <h1 className={`title text-center font-extrabold text-2xl`}>
           PENFRIENDS
