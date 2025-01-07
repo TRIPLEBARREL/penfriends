@@ -1,5 +1,6 @@
 import Envelopes from "@/app/feat/envelopes";
 import Image from "next/image";
+import Letters from "./feat/letter";
 
 export default function Home() {
   return (
@@ -14,7 +15,9 @@ export default function Home() {
           <h2 className={`text-center font-extrabold m-5 mb-10`}>INBOX</h2>
           <Envelopes />
         </div>
-        <div className={`letter`}></div>
+        <div className={`letter`}>
+          <Letters />
+        </div>
       </div>
     </div>
   );

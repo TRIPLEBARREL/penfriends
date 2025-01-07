@@ -7,7 +7,7 @@ export default function Envelopes() {
         <Envelope />
       </div>
       <div
-        className={`absolute top-20 left-10 z-20 hover:z-40 w-full rotate-3`}
+        className={`absolute top-20 left-3 z-20 hover:z-40 w-full rotate-3`}
       >
         <Envelope />
       </div>
