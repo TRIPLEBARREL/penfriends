@@ -6,9 +6,7 @@ export default function Envelopes() {
       <div className={`absolute hover:mb-10 z-30 hover:z-40 w-full`}>
         <Envelope />
       </div>
-      <div
-        className={`absolute top-20 left-3 z-20 hover:z-40 w-full rotate-3`}
-      >
+      <div className={`absolute top-20 left-3 z-20 hover:z-40 w-full rotate-3`}>
         <Envelope />
       </div>
       <div className={`absolute top-40 z-10 hover:z-40 w-full -rotate-3`}>

@@ -10,7 +10,7 @@ export default function Home() {
           PENFRIENDS
         </h1>
       </div>
-      <div className={`grid grid-cols-2 gap-10 mt-10`}>
+      <div className={`grid grid-cols-2 gap-10 mt-16 mb-36`}>
         <div className={`inbox`}>
           <h2 className={`text-center font-extrabold m-5 mb-10`}>INBOX</h2>
           <Envelopes />
