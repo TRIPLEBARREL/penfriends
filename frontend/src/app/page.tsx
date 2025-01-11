@@ -1,13 +1,15 @@
-import Envelopes from "@/app/feat/envelopes";
-import Image from "next/image";
 import Letter from "./feat/letter";
 
 export default function Home() {
   return (
-    <div className={`container mx-auto select-none h-dvh max-h-dvh p-10 overflow-auto`}>
+    <div
+      className={`container mx-auto select-none h-dvh max-h-dvh p-10 overflow-auto`}
+    >
       <div className={`flex flex-col h-full w-full`}>
         <div className={`h-fit`}>
-          <h1 className={`title text-center font-extrabold text-base sm:text-xl lg:text-2xl pb-10`}>
+          <h1
+            className={`title text-center font-extrabold text-base sm:text-xl lg:text-2xl pb-10`}
+          >
             PENFRIENDS
           </h1>
         </div>
