@@ -1,16 +1,10 @@
-import Image from "next/image";
-
-interface Props {
-  envelope: Envelope;
-}
-
 export interface Envelope {
   id: string;
   title: string;
   content: string;
 }
 
-export default function Envelope({ envelope }: Props) {
+export default function Envelope() {
   return (
     <div
       className={`bg-gradient-to-b from-white to-stone-100 rounded-lg shadow-xl hover:scale-105 transform transition ease-out duration-200 -rotate-1 font-sans aspect-video select-none w-[40vw] h-[20vw] max-w-xl max-h-36`}
