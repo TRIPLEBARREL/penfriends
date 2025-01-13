@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/express": "^5.0.0",
     "express": "^4.21.2",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "uuidv4": "^6.2.13"
   }
 }
