@@ -1,16 +1,21 @@
 import data from './database.json';
+import { uuid } from 'uuidv4';
 
 function getLetterDetails(email: String, letterId: String) {
-  
+
 }
 
 function createLetter(email: String) {
-
+    if (!(email in data)) {
+        throw new Error("User not found!");
+    }
+    const letterId = uuid();
+    return letterId;
 }
 
 function replyToLetter(email: String, letterId: String) {
 
-} 
+}
 
 function addSticker(email: String, letterId: String, stickerId: string) {
 
