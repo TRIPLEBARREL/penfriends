@@ -5,7 +5,7 @@ function getLetterDetails(email: String, letterId: String) {
 
 }
 
-function createLetter(email: String) {
+function createLetter(email: string): string {
     if (!(email in data)) {
         throw new Error("User not found!");
     }
@@ -13,7 +13,13 @@ function createLetter(email: String) {
     return letterId;
 }
 
-function replyToLetter(email: String, letterId: String) {
+function replyToLetter(email: string, letterId: string): string {
+    if (!(email in data)) {
+        throw new Error("User not found!");
+    }
+    if (!(data[email].letters.opened.letterId)) {
+        throw new Error("")
+    }
 
 }
 
