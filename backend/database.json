@@ -11,14 +11,16 @@
               "title": "Letter 1",
               "content": "Content 1",
               "date": "2021-01-01",
-              "author": "user-2"
+              "author": "user-2",
+              "replied-id": null
             },
             {
               "id": "l-2",
               "title": "Letter 2",
               "content": "Content 2",
               "date": "2021-01-02",
-              "author": "user-3"
+              "author": "user-3",
+              "replied-id": null
             }
           ],
           "opened": [
@@ -27,7 +29,8 @@
               "title": "Letter 3",
               "content": "Content 3",
               "date": "2021-01-03",
-              "author": "user-4"
+              "author": "user-4",
+              "replied-id": null
             }
           ],
           "sent": [
@@ -37,7 +40,7 @@
               "content": "Content 4",
               "date": "2021-01-04",
               "author": "user-1",
-              "reply": false
+              "replied-id": null
             },
             {
               "id": "l-5",
@@ -45,7 +48,7 @@
               "content": "Content 5",
               "date": "2021-01-04",
               "author": "user-3",
-              "reply": true
+              "replied-id": "l-2"
             }
           ]
         },
