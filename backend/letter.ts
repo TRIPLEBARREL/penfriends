@@ -1,26 +1,41 @@
-import data from './database.json';
+import usersJSON from './users.json';
 import { uuid } from 'uuidv4';
+import { Database, User, Letter } from './types';
 
-function getLetterDetails(email: String, letterId: String) {
+const users = usersJSON as Database;
 
+function getLetterById(email: string, letterId: string): Letter | undefinded {
+    const allLetters = [...users[email].letters.new, ...users[email].letters.opened, ...users[email].letters.sent];
+    const letter = allLetters.find((letter) => letter.id === letterId);
+    return letter;
+}
+
+function getLetterDetails(email: string, letterId: string): Letter | undefined {
+    if (!(email in users)) {
+        throw new Error("User not found!");
+    }
+
+    return getLetterById(email, letterId)
 }
 
 function createLetter(email: string): string {
-    if (!(email in data)) {
+    if (!(email in users)) {
         throw new Error("User not found!");
     }
     const letterId = uuid();
     return letterId;
 }
 
-function replyToLetter(email: string, letterId: string): string {
-    if (!(email in data)) {
+function replyToLetter(replyEmail: string, sentEmail: string, letterId: string,): string {
+    if (!(replyEmail in users)) {
         throw new Error("User not found!");
     }
-    if (!(data[email].letters.opened.letterId)) {
-        throw new Error("")
+    const letter = users[replyEmail].letters.opened.find(letter => letter.id === letterId);
+    if (!letter) {
+        throw new Error("Letter not found!");
     }
-
+    const replyId = createLetter(sentEmail);
+    return replyId;
 }
 
 function addSticker(email: String, letterId: String, stickerId: string) {
