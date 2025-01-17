@@ -1,7 +1,9 @@
 // import { AccessError } from './error';
-// import {jwt} from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
-import data from './database.json';
+import data from './users.json';
+import fs from 'fs';
+import { getUser } from './helper';
 
 // export const getEmailFromAuthorization = (authorization: any) => {
 //   try {
@@ -17,30 +19,87 @@ import data from './database.json';
 //   }
 // };
 
-function authLogin(email: string, password: string) {
-  if (!(email in data)) {
+/**
+ * authLogin: logs in the user and returns the token
+ * @param email 
+ * @param password 
+ * @returns 
+ */
+function authLogin(email: string, password: string): User {
+  const user: User = getUser(email);
+  if (!user) {
     throw new Error("User not found!");
   }
-  if (data[email].password !== password) {
+  if (user.password !== password) {
     throw new Error("Incorrect password!");
   }
-  return crypto.randomUUID();
+
+  return user;
 }
 
+/**
+ * authRegister: registers the user, saves the user to the database and returns the token
+ * @param email
+ * @param password 
+ * @param name 
+ * @returns 
+ */
 function authRegister(email: string, password: string, name: string) {
-  if (email in data) {
-    throw new Error("User already exists!");
-  }
-  data[email] = { password, name };
-  return crypto.randomUUID();
+  const dataObj = JSON.parse(fs.readFileSync('./users.json', {encoding: 'utf8'}));
+  const id = crypto.randomUUID();
+  dataObj.emails.push({
+    id: id,
+    password: password, 
+    name: name,
+    letters: {
+      new: [],
+      old: [],
+      sent: []
+    },
+    inventory: {
+      backgrounds: [],
+      stickers: [],
+      badges: []
+    }
+  });
+  fs.writeFileSync('./users.json', JSON.stringify(dataObj));
+
+  return {
+    id: id,
+    password: password, 
+    name: name,
+    letters: {
+      new: [],
+      old: [],
+      sent: []
+    },
+    inventory: {
+      backgrounds: [],
+      stickers: [],
+      badges: []
+    }
+  };
 }
 
-function authResetPassword(email: string, newPasword: string) {
-  if (!(email in data)) {
+/**
+ * authResetPassword: resets the password of the user but does not login the user
+ * @param email
+ * @param newPasword 
+ * @returns 
+ */
+function authResetPassword(email: string, newPassword: string) {
+  let dataObj = JSON.parse(fs.readFileSync('./users.json', {encoding: 'utf8'}));
+  const targetUser = dataObj.emails.filter((user: User) => user.email === email);
+  if (!targetUser) {
     throw new Error("User not found!");
   }
-  data[email].password = '';
+  targetUser.password = newPassword;
+
+  // updating function
+  dataObj = dataObj.map((email: string) => targetUser === email ? targetUser : email); 
   return crypto.randomUUID();
 }
+
+
 
 export { authLogin, authRegister, authResetPassword };
