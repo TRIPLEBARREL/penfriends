@@ -4,6 +4,13 @@
         "id": "user-1",
         "password": "123456",
         "name": "John Doe",
+        "draftLetters": [
+          {
+            "id": "l-6",
+            "title": "Letter 6",
+            "content": "Content 6"
+          }
+        ],
         "letters": {
           "new": [
             {

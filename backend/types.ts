@@ -3,6 +3,7 @@ export interface User {
     id: string;
     password: string;
     name: string;
+    draftLetters: DraftLetter[];
     letters: {
         new: Letter[];
         opened: Letter[];
@@ -20,6 +21,12 @@ export interface Letter {
     "replied-id": string | null;
 }
 
+export interface DraftLetter {
+    id: string;
+    title: string;
+    content: string;
+}
+
 export interface Inventory {
     backgrounds: InventoryItem[];
     stickers: InventoryItem[];
@@ -27,9 +34,15 @@ export interface Inventory {
 }
 
 export interface InventoryItem {
-    id: string,
-    name: string,
-    price: number
+    id: string;
+    name: string;
+    price: number;
+}
+
+export interface Sticker {
+    id: string;
+    name: string;
+    price: number;
 }
 
 export interface Database {

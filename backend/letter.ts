@@ -4,7 +4,7 @@ import { Database, User, Letter } from './types';
 
 const users = usersJSON as Database;
 
-function getLetterById(email: string, letterId: string): Letter | undefinded {
+function getLetterById(email: string, letterId: string): Letter | undefined {
     const allLetters = [...users[email].letters.new, ...users[email].letters.opened, ...users[email].letters.sent];
     const letter = allLetters.find((letter) => letter.id === letterId);
     return letter;
@@ -38,20 +38,18 @@ function replyToLetter(replyEmail: string, sentEmail: string, letterId: string,)
     return replyId;
 }
 
-function addSticker(email: String, letterId: String, stickerId: string) {
+function sendLetter(email: string, letterId: string) {
+    if (!(email in users)) {
+        throw new Error("User not found!");
+    }
+    const draftLetter = users[email].draftLetters.find(draftLetter => draftLetter.id === letterId);
+    if (!draftLetter) {
+        throw new Error("Draft letter not found!");
+    }
 
-}
-
-function addDetails(email: String, letterId: String, title: String, content: String) {
-
-}
-
-function sendLetter(email: String, letterId: String) {
-
-}
 
 function deleteLetter(email: String, letterId: String) {
 
 }
 
-export { getLetterDetails, createLetter, replyToLetter, addSticker, addDetails, sendLetter, deleteLetter };
+export { getLetterDetails, createLetter, replyToLetter, sendLetter, deleteLetter };
