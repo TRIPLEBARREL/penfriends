@@ -46,7 +46,7 @@ function sendLetter(email: string, letterId: string) {
     if (!draftLetter) {
         throw new Error("Draft letter not found!");
     }
-
+}
 
 function deleteLetter(email: String, letterId: String) {
 
