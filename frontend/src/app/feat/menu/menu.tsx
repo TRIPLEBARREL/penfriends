@@ -28,6 +28,7 @@ const Menu = () => {
     "Profile",
     "Contact Us",
   ];
+
   const [selectedOption, setSelectedOption] = useState(menuOptions[0]);
 
   return (
