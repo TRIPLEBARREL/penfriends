@@ -1,6 +1,7 @@
 import usersJSON from './users.json';
 import { uuid } from 'uuidv4';
-import { Database, User, Letter } from './types';
+import { Database, User, Letter, DraftLetter } from './types';
+import { fileReading } from './filereading';
 
 const users = usersJSON as Database;
 
@@ -39,13 +40,24 @@ function replyToLetter(replyEmail: string, sentEmail: string, letterId: string,)
 }
 
 function sendLetter(email: string, letterId: string) {
-    if (!(email in users)) {
+    const jsonData = fileReading('users.json');
+    const user = jsonData[email];
+    if (!user) {
         throw new Error("User not found!");
     }
-    const draftLetter = users[email].draftLetters.find(draftLetter => draftLetter.id === letterId);
-    if (!draftLetter) {
+    const letterToSendIndex = user.draftLetters.findIndex((draft: DraftLetter) => draft.id === letterId);
+    if (letterToSendIndex === -1) {
         throw new Error("Draft letter not found!");
     }
+    const draftLetter: DraftLetter = user.draftLetters[letterToSendIndex];
+    const letterToSend: Letter = {
+        ...draftLetter,
+        date: "2025-01-19",
+        author: "user-1",
+        "replied-id": null
+    }
+    user.draftLetters.splice(letterToSendIndex, 1);
+    user.letters.sent.push(letterToSend);
 }
 
 function deleteLetter(email: String, letterId: String) {
