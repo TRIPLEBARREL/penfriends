@@ -1,30 +1,50 @@
-type Letter = {
+// Interface for users
+export interface User {
+  id: string;
+  password: string;
+  name: string;
+  draftLetters: DraftLetter[];
+  letters: {
+      new: Letter[];
+      opened: Letter[];
+      sent: Letter[];
+  };
+  inventory: Inventory;
+}
+
+export interface Letter {
   id: string;
   title: string;
   content: string;
-  date: Date;
+  date: string;
   author: string;
-  repliedId?: string;
-};
-
-type User = {
-  email: string;
-  password: string;
-  name: string;
-  letters: {
-    new: Letter[];
-    old: Letter[];
-    sent: Letter[];
-  };
-  inventory: {
-    backgrounds: string[];
-    stickers: string[];
-    badges: string[];
-  };
+  "replied-id": string | null;
 }
 
-type Item = {
+export interface DraftLetter {
+  id: string;
+  title: string;
+  content: string;
+}
+
+export interface Inventory {
+  backgrounds: InventoryItem[];
+  stickers: InventoryItem[];
+  badges: InventoryItem[];
+}
+
+export interface InventoryItem {
   id: string;
   name: string;
-  cost: number;
+  price: number;
+}
+
+export interface Sticker {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface Database {
+  [email: string]: User;
 }
