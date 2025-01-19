@@ -1,10 +1,15 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
+
+// useRef => render persistent refer
+// useEffect => hook that runs effect on change
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close menu when clicking outside
+  // Close menu when clicking outside: created function to handle outside clicks, created global event listener for mouse clicks that calls handle
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
