@@ -4,6 +4,7 @@
         "id": "user-1",
         "password": "123456",
         "name": "John Doe",
+        "coins": 1000,
         "draftLetters": [
           {
             "id": "l-6",
