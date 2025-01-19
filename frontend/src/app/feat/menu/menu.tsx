@@ -1,5 +1,12 @@
 "use client";
 
+// improve style (below)
+// square and larger menu icon
+// larger font following global font delcarations
+// more left padding
+// larger vertical spacing
+// hover highlight also follows changes
+
 import React, { useState, useRef, useEffect } from "react";
 
 // useRef => render persistent refer
