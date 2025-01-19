@@ -1,7 +1,8 @@
 import usersJSON from './users.json';
 import { uuid } from 'uuidv4';
-import { Database, User, Letter, DraftLetter } from './types';
+import { Database, Letter, DraftLetter } from './types';
 import { fileReading } from './filereading';
+import { removeLetter } from './removeLetter';
 
 const users = usersJSON as Database;
 
@@ -60,8 +61,13 @@ function sendLetter(email: string, letterId: string) {
     user.letters.sent.push(letterToSend);
 }
 
-function deleteLetter(email: String, letterId: String) {
-
+function deleteLetter(email: string, letterId: string) {
+    const jsonData = fileReading('users.json');
+    const user = jsonData[email];
+    if (!user) {
+        throw new Error("User not found!");
+    }
+    removeLetter(user, letterId);
 }
 
 export { getLetterDetails, createLetter, replyToLetter, sendLetter, deleteLetter };
