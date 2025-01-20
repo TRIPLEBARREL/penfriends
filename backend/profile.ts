@@ -1,6 +1,7 @@
 
 import fs from 'fs';
 import { getUser } from './helper';
+import { User } from './types';
 
 /**
  * showProfile: returns user information

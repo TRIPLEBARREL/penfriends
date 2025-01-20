@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 import data from './users.json';
 import fs from 'fs';
 import { getUser } from './helper';
+import { User } from './types';
 
 // export const getEmailFromAuthorization = (authorization: any) => {
 //   try {
@@ -89,7 +90,7 @@ function authRegister(email: string, password: string, name: string) {
  */
 function authResetPassword(email: string, newPassword: string) {
   let dataObj = JSON.parse(fs.readFileSync('./users.json', {encoding: 'utf8'}));
-  const targetUser = dataObj.emails.filter((user: User) => user.email === email);
+  const targetUser = dataObj.keys().filter((user: string) => user === email);
   if (!targetUser) {
     throw new Error("User not found!");
   }
@@ -100,6 +101,12 @@ function authResetPassword(email: string, newPassword: string) {
   return crypto.randomUUID();
 }
 
+function removeUser(email: string) {
+  let dataObj = JSON.parse(fs.readFileSync('./users.json', {encoding: 'utf8'}));
+  const targetUser: User = dataObj.filter((user: string) => user === email);
+  dataObj = dataObj.filter((user: string) => user !== email);
+  fs.writeFileSync('./users.json', JSON.stringify(dataObj));
+  return { name: targetUser.name };
+}
 
-
-export { authLogin, authRegister, authResetPassword };
+export { authLogin, authRegister, authResetPassword, removeUser };

@@ -59,8 +59,7 @@ app.get('/letter/open', (req: Request, res: Response) => {
   }
   const email = req.query.email as string;
   const letterId = req.query.letterId as string;
-  res.send(JSON.stringify(getLetterDetails(email as string, letterId)));
-  return;
+  return res.send(JSON.stringify(getLetterDetails(email as string, letterId)));
 });
 
 app.post('/letter/create', (req: Request, res: Response) => {
@@ -72,8 +71,7 @@ app.post('/letter/create', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const { email } = req.body;
-  res.json(createLetter(email as string));
-  return;
+  return res.status(200).json(createLetter(email as string));
 });
 
 app.post('/letter/reply', (req: Request, res: Response) => {
@@ -85,8 +83,7 @@ app.post('/letter/reply', (req: Request, res: Response) => {
   }
 
   const { letterId, email } = req.body;
-  res.json(replyToLetter(email as string, letterId as string));
-  return;
+  return res.status(200).json(replyToLetter(email as string, letterId as string));
 });
 
 app.post('/letter/add/sticker', (req: Request, res: Response) => {
@@ -99,7 +96,7 @@ app.post('/letter/add/sticker', (req: Request, res: Response) => {
   }
 
   const { letterId, stickerId, email } = req.body;
-  return res.json(addSticker(email as string, letterId as string, stickerId as string));
+  return res.status(200).json(addSticker(email as string, letterId as string, stickerId as string));
 });
 
 // ----------------------------
@@ -112,7 +109,7 @@ app.post('/letter/add/details', (req: Request, res: Response) => {
   }
 
   const { letterId, title, content, email } = req.body;
-  return res.json(addDetails(email as string, letterId as string, title as string, content as string));
+  return res.status(200).json(addDetails(email as string, letterId as string, title as string, content as string));
 });
 
 app.post('/letter/send', (req: Request, res: Response) => {
@@ -124,7 +121,7 @@ app.post('/letter/send', (req: Request, res: Response) => {
   }
 
   const { letterId, email } = req.body;
-  return res.json(sendLetter(email as string, letterId));
+  return res.status(200).json(sendLetter(email as string, letterId));
 });
 
 app.delete('/letter/delete', (req: Request, res: Response) => {
@@ -137,7 +134,7 @@ app.delete('/letter/delete', (req: Request, res: Response) => {
 
   const letterId = req.query.letterId as string;
   const email = req.query.email as string;
-  return res.json(deleteLetter(email, letterId));
+  return res.status(200).json(deleteLetter(email, letterId));
 });
 
 app.get('/letters/new', (req: Request, res: Response) => {
@@ -148,7 +145,7 @@ app.get('/letters/new', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const email = req.query.email as string;
-  return res.json(getNewLetters(email));
+  return res.status(200).json(getNewLetters(email));
 });
 
 app.get('/letters/opened', (req: Request, res: Response) => {
@@ -159,7 +156,7 @@ app.get('/letters/opened', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const email = req.query.email as string;
-  return res.json(getOldLetters(email));
+  return res.status(200).json(getOldLetters(email));
 });
 
 app.get('/letters/sent', (req: Request, res: Response) => {
@@ -170,7 +167,7 @@ app.get('/letters/sent', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const email = req.query.email as string;
-  return res.json(getSentLetters(email));
+  return res.status(200).json(getSentLetters(email));
 });
 
 app.get('/shop/show', (req: Request, res: Response) => {
@@ -181,7 +178,7 @@ app.get('/shop/show', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
 
-  return res.json(showShopItems());
+  return res.status(200).json(showShopItems());
 });
 
 app.post('/shop/purchase', (req: Request, res: Response) => {
@@ -193,7 +190,7 @@ app.post('/shop/purchase', (req: Request, res: Response) => {
   }
 
   const { itemId, cost, type, email } = req.body;
-  return res.json(purchaseItem(email as string, itemId as string, type as string, parseInt(cost)));
+  return res.status(200).json(purchaseItem(email as string, itemId as string, type as string, parseInt(cost)));
 });
 
 app.get('/inventory/backgrounds', (req: Request, res: Response) => {
@@ -204,7 +201,7 @@ app.get('/inventory/backgrounds', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const email = req.query.email as string;
-  return res.json(getPurchasedBackgrounds(email));
+  return res.status(200).json(getPurchasedBackgrounds(email));
 });
 
 app.get('/inventory/stickers', (req: Request, res: Response) => {
@@ -215,7 +212,7 @@ app.get('/inventory/stickers', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const email = req.query.email as string;
-  return res.json(getPurchasedStickers(email));
+  return res.status(200).json(getPurchasedStickers(email));
 });
 
 app.get('/inventory/all', (req: Request, res: Response) => {
@@ -226,7 +223,7 @@ app.get('/inventory/all', (req: Request, res: Response) => {
     return res.status(401).json({ error: "Unauthorised access" });
   }
   const email = req.query.email as string;
-  return res.json(showInventory(email));
+  return res.status(200).json(showInventory(email));
 });
 
 app.get('/profile', (req: Request, res: Response) => {
@@ -242,17 +239,17 @@ app.get('/profile', (req: Request, res: Response) => {
 
 app.post('/auth/login', (req: Request, res: Response) => {
   const { email, password } = req.body;
-  return res.json({ user: authLogin(email as string, password as string), token: jwt.sign({ email: email }, process.env.PRIVATEKEY, { expiresIn: '1h' }) });
+  return res.status(200).json({ user: authLogin(email as string, password as string), token: jwt.sign({ email: email }, process.env.PRIVATEKEY, { expiresIn: '1h' }) });
 });
 
 app.post('/auth/register', (req: Request, res: Response) => {
   const { email, password, name } = req.body;
-  return res.json({ user: authRegister(email as string, password as string, name as string), token: jwt.sign({ email: email }, process.env.PRIVATEKEY, { expiresIn: '1h' }) });
+  return res.status(200).json({ user: authRegister(email as string, password as string, name as string), token: jwt.sign({ email: email }, process.env.PRIVATEKEY, { expiresIn: '1h' }) });
 });
 
 app.post('/auth/resetpassword', (req: Request, res: Response) => {
   const { email, newPassword } = req.body;
-  return res.json(authResetPassword(email as string, newPassword as string));
+  return res.status(200).json(authResetPassword(email as string, newPassword as string));
 });
 
 app.listen(PORT, function (err: Error) {
