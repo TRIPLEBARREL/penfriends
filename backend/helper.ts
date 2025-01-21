@@ -1,4 +1,5 @@
-import fs from 'fs';
+const fs = require('fs');
+import { User } from './types';
 
 // ONLY use for GET requests
 /**
@@ -8,5 +9,5 @@ import fs from 'fs';
  */
 export function getUser(email: string): User {
   const data = JSON.parse(fs.readFileSync('./users.json', {encoding: 'utf8'}));
-  return data.filter((user) => user.email === email);
+  return data.keys().filter((user: string) => user === email);
 }

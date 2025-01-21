@@ -1,7 +1,3 @@
-// import { AccessError } from './error';
-const jwt = require('jsonwebtoken');
-
-import data from './users.json';
 import fs from 'fs';
 import { getUser } from './helper';
 import { User } from './types';
