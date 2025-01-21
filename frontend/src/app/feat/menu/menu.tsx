@@ -43,12 +43,12 @@ const Menu = () => {
       {/* Hamburger Button */}
       <button
         onClick={toggleMenu}
-        className="fixed top-10 left-10 z-50 h-8 w-8 flex flex-col justify-between items-center"
+        className="fixed top-10 left-10 z-50 sm:h-6 sm:w-6 md:h-8 md:w-8 lg:h-10 lg:w-10 flex flex-col justify-between items-center hover:scale-125 transition-transform duration-300"
         aria-label="Open Menu" // alt text
       >
-        <span className="block h-1.5 w-full bg-black rounded-xl"></span>
-        <span className="block h-1.5 w-full bg-black rounded-xl"></span>
-        <span className="block h-1.5 w-full bg-black rounded-xl"></span>
+        <span className="block sm:h-1 md:h-1.5 lg:h-2 w-full bg-black rounded-xl"></span>
+        <span className="block sm:h-1 md:h-1.5 lg:h-2 w-full bg-black rounded-xl"></span>
+        <span className="block sm:h-1 md:h-1.5 lg:h-2 w-full bg-black rounded-xl"></span>
       </button>
 
       {/* Overlay */}
@@ -61,9 +61,9 @@ const Menu = () => {
       {/* Menu */}
       <div
         ref={menuRef}
-        className={`fixed top-0 left-0 w-1/4 h-full z-50 transform ${
+        className={`fixed top-0 left-0 h-full z-50 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full" // x-0 ---> x-full => menu on left of screen ---> menu off screen
-        } transition-transform duration-300`}
+        } transition-transform duration-300 sm:w-1/2 md:w-1/3 lg:w-1/4`}
         style={{
           backgroundColor: "#824670",
           fontFamily: "var(--font-bio-rhyme)",
@@ -82,30 +82,29 @@ const Menu = () => {
         </button>
 
         {/* Menu Items */}
-        <ul className="mt-6 space-y-4 px-6">
-          {menuOptions.map(
-            // 6 margin, 4 vertical spacing between
-            (option) => (
-              <li
-                key={option}
-                className={`relative text-white font-extrabold cursor-pointer ${
-                  selectedOption === option
-                    ? "text-yellow-300 px-4 py-2" // 4 horix and 2 verti padding inside li element
-                    : "hover:text-yellow-200 px-4 py-2"
-                }`}
-                style={{
-                  fontFamily: "var(--font-bio-rhyme)",
-                  fontSize: "2rem",
-                }}
-                onClick={() => {
-                  setSelectedOption(option);
-                  setIsOpen(false);
-                }}
-              >
-                {option}
-              </li>
-            )
-          )}
+        <ul className="space-y-4 sm:mt-2 md:mt-4 lg:mt-6 sm:px-2 md:px-4 lg:px-6">
+          {menuOptions.map((option) => (
+            <li
+              key={option}
+              className={`relative text-white font-extrabold cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 ${
+                // focus for keyboard accessibility
+                selectedOption === option
+                  ? "text-yellow-300 px-4 py-2"
+                  : "hover:text-yellow-200 px-4 py-2"
+              }`}
+              style={{
+                fontFamily: "var(--font-bio-rhyme)",
+                fontSize: "clamp(1.5rem, 2vw, 2rem)", // responsive font size
+                minHeight: "3rem", // min height for touch targets
+              }}
+              onClick={() => {
+                setSelectedOption(option);
+                setIsOpen(false);
+              }}
+            >
+              {option}
+            </li>
+          ))}
         </ul>
       </div>
     </>
@@ -113,3 +112,18 @@ const Menu = () => {
 };
 
 export default Menu;
+
+/* SCROLLABLE MENU
+<div
+  ref={menuRef}
+  className={`fixed top-0 left-0 h-full z-50 transform ${
+    isOpen ? "translate-x-0" : "-translate-x-full"
+  } transition-transform duration-300 sm:w-1/2 md:w-1/3 lg:w-1/4 overflow-y-auto`}
+  style={{
+    backgroundColor: "#824670",
+    fontFamily: "var(--font-bio-rhyme)",
+  }}
+>
+  ...
+</div>
+*/
