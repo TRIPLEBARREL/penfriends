@@ -1,15 +1,29 @@
 // Interface for users
 export interface User {
   id: string;
-  password: string;
+  password?: string;
   name: string;
-  draftLetters: DraftLetter[];
+  coins: number;
   letters: {
+      draft: Letter[]
       new: Letter[];
       opened: Letter[];
       sent: Letter[];
   };
   inventory: Inventory;
+}
+
+export interface IdObject {
+  id: string;
+}
+
+export interface Code {
+  code: number;
+  message?: string;
+}
+
+export interface UsersDB {
+    [key: string]: User;
 }
 
 export interface Letter {

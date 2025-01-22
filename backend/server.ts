@@ -35,6 +35,7 @@ import {
   authRegister,
   authResetPassword
 } from './auth';
+import { verifyToken } from './helper';
 
 // Set up web app
 const app = express();
@@ -52,34 +53,33 @@ const HOST: string = process.env.IP || 'localhost';
 app.get('/letter/open', (req: Request, res: Response) => {
   // clear any existing letter, return letter for display and move letter to opened list
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   const letterId = req.query.letterId as string;
-  return res.send(JSON.stringify(getLetterDetails(email as string, letterId)));
+  return res.status(200).send(JSON.stringify(getLetterDetails(email as string, letterId)));
 });
 
 app.post('/letter/create', (req: Request, res: Response) => {
   // creates empty letter
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const { email } = req.body;
   return res.status(200).json(createLetter(email as string));
 });
 
 app.post('/letter/reply', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   const { letterId, email } = req.body;
@@ -89,10 +89,9 @@ app.post('/letter/reply', (req: Request, res: Response) => {
 app.post('/letter/add/sticker', (req: Request, res: Response) => {
   // sticker limit of 3
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   const { letterId, stickerId, email } = req.body;
@@ -102,10 +101,9 @@ app.post('/letter/add/sticker', (req: Request, res: Response) => {
 // ----------------------------
 app.post('/letter/add/details', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   const { letterId, title, content, email } = req.body;
@@ -114,10 +112,9 @@ app.post('/letter/add/details', (req: Request, res: Response) => {
 
 app.post('/letter/send', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   const { letterId, email } = req.body;
@@ -126,10 +123,9 @@ app.post('/letter/send', (req: Request, res: Response) => {
 
 app.delete('/letter/delete', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   const letterId = req.query.letterId as string;
@@ -139,43 +135,42 @@ app.delete('/letter/delete', (req: Request, res: Response) => {
 
 app.get('/letters/new', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   return res.status(200).json(getNewLetters(email));
 });
 
 app.get('/letters/opened', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   return res.status(200).json(getOldLetters(email));
 });
 
 app.get('/letters/sent', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   return res.status(200).json(getSentLetters(email));
 });
 
 app.get('/shop/show', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   return res.status(200).json(showShopItems());
@@ -183,10 +178,9 @@ app.get('/shop/show', (req: Request, res: Response) => {
 
 app.post('/shop/purchase', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
 
   const { itemId, cost, type, email } = req.body;
@@ -195,33 +189,33 @@ app.post('/shop/purchase', (req: Request, res: Response) => {
 
 app.get('/inventory/backgrounds', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   return res.status(200).json(getPurchasedBackgrounds(email));
 });
 
 app.get('/inventory/stickers', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   return res.status(200).json(getPurchasedStickers(email));
 });
 
 app.get('/inventory/all', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   const email = req.query.email as string;
   return res.status(200).json(showInventory(email));
 });
@@ -229,11 +223,11 @@ app.get('/inventory/all', (req: Request, res: Response) => {
 app.get('/profile', (req: Request, res: Response) => {
   const token = req.headers['token'] as string;
   const email = req.query.email as string;
-  try {
-    jwt.verify(token, process.env.PRIVATEKEY);
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorised access" });
+  const resObj = verifyToken(token)
+  if (resObj.code !== 200) {
+    return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
+
   return res.status(200).json(showProfile(email));
 });
 
