@@ -1,4 +1,5 @@
 // const { describe, afterEach } = require("node:test")
+import { describe, test, expect } from '@jest/globals';
 import { authLogin, authRegister, authResetPassword, removeUser } from "./auth"
 
 test('npm syntax test', () => {
