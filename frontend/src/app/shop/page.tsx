@@ -1,9 +1,6 @@
 "use client";
 
-// maybe product component (component file)
 // shop shelf design (ask jonno)
-// sale sticker (component file small)
-// price sticker (component file small)
 // timer
 // header (global implementation?)
 

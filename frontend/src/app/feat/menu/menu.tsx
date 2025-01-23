@@ -4,10 +4,12 @@
 // make hamubrger menu icon increase in size when hovered
 
 import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   // function to handle when users click outside menu
   // useEffect with no dependencies means add listener on menu open and remove on close
@@ -27,13 +29,13 @@ const Menu = () => {
   // Toggle menu open/close
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Menu options
+  // Menu options // DOUBLE CHECK ROUTES !!!
   const menuOptions = [
-    "Create Letter",
-    "Your Letters",
-    "Shop",
-    "Profile",
-    "Contact Us",
+    { label: "Create Letter", path: "/create-letter" },
+    { label: "Your Letters", path: "/your-letters" },
+    { label: "Shop", path: "/shop" },
+    { label: "Profile", path: "/profile" },
+    { label: "Contact Us", path: "/contact-us" },
   ];
 
   const [selectedOption, setSelectedOption] = useState(menuOptions[0]);
@@ -85,7 +87,7 @@ const Menu = () => {
         <ul className="space-y-4 sm:mt-2 md:mt-4 lg:mt-6 sm:px-2 md:px-4 lg:px-6">
           {menuOptions.map((option) => (
             <li
-              key={option}
+              key={option.label}
               className={`relative text-white font-extrabold cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 ${
                 // focus for keyboard accessibility
                 selectedOption === option
@@ -100,9 +102,10 @@ const Menu = () => {
               onClick={() => {
                 setSelectedOption(option);
                 setIsOpen(false);
+                router.push(option.path);
               }}
             >
-              {option}
+              {option.label}
             </li>
           ))}
         </ul>

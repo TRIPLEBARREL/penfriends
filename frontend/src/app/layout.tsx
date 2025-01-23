@@ -60,9 +60,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${andika.variable} ${bioRhyme.variable} ${dotGothic16.variable} antialiased`}
       >
-        {/* global integration of hamMenu? */}
         <Menu />
-        {/* ??? */}
         {children}
       </body>
     </html>
