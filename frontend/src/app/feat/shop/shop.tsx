@@ -1,54 +1,118 @@
 "use client";
 
+// maybe product component (component file)
+// shop shelf design (ask jonno)
+// sale sticker (component file small)
+// price sticker (component file small)
+// timer
+// header (global implementation?)
+
 import React from "react";
 
 const ShopPage = () => {
-  const dummyProducts = [
-    { id: 1, name: "Product 1", price: "$20" },
-    { id: 2, name: "Product 2", price: "$30" },
-    { id: 3, name: "Product 3", price: "$40" },
+  // Dummy product data
+  const products = [
+    {
+      id: 1,
+      name: "Postcard Background",
+      price: 20,
+      originalPrice: 40,
+      image: "/postcard.png", // Replace with real images
+      isOnSale: true,
+    },
+    {
+      id: 2,
+      name: "Home Background",
+      price: 130,
+      image: "/home-background.png", // Replace with real images
+    },
+    {
+      id: 3,
+      name: "Exclusive Stamp",
+      price: 240,
+      image: "/stamp.png", // Replace with real images
+    },
+    {
+      id: 4,
+      name: "Exclusive Badge",
+      price: 130,
+      image: "/badge.png", // Replace with real images
+    },
+    {
+      id: 5,
+      name: "Home Background",
+      price: 130,
+      image: "/wood-background.png", // Replace with real images
+    },
   ];
 
-  const categories = ["Category 1", "Category 2", "Category 3"];
-
   return (
-    <div className="container mx-auto p-6">
+    <div className="bg-yellow-50 min-h-screen">
       {/* Header */}
-      <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold">Shop</h1>
-        <p className="text-lg text-gray-600">Discover our products</p>
+      <header className="text-center py-6">
+        <h1
+          className="text-4xl font-bold"
+          style={{ fontFamily: "var(--font-bio-rhyme)" }}
+        >
+          SHOP
+        </h1>
+        <p
+          className="text-lg mt-2"
+          style={{ fontFamily: "var(--font-bio-rhyme)" }}
+        >
+          REFRESHES IN 01:34
+        </p>
       </header>
 
-      {/* Categories */}
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-4">Categories</h2>
-        <ul className="flex gap-4">
-          {categories.map((category) => (
-            <li key={category} className="cursor-pointer hover:text-blue-500">
-              {category}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Products */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Products</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {dummyProducts.map((product) => (
-            <div
-              key={product.id}
-              className="border rounded-lg p-4 text-center shadow hover:shadow-lg transition-shadow"
-            >
-              <h3 className="text-xl font-bold">{product.name}</h3>
-              <p className="text-gray-700">{product.price}</p>
-              <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                Add to Cart
-              </button>
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6 pb-10">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="flex flex-col items-center bg-transparent"
+            style={{
+              fontFamily: "var(--font-bio-rhyme)",
+            }}
+          >
+            {/* Product Image */}
+            <div className="relative">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="rounded-md shadow-md w-48 h-32 object-cover"
+              />
+              {product.isOnSale && (
+                <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                  SALE!
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      </section>
+
+            {/* Product Name */}
+            <h2 className="text-xl font-bold mt-4 text-center">
+              {product.name}
+            </h2>
+
+            {/* Product Price */}
+            <div className="text-center mt-2">
+              <span className="text-lg font-bold">{product.price} </span>
+              {product.originalPrice && (
+                <span className="text-gray-500 line-through text-sm ml-2">
+                  {product.originalPrice}
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <footer
+        className="text-center text-sm py-6"
+        style={{ fontFamily: "var(--font-bio-rhyme)" }}
+      >
+        TRIPLEBARREL
+      </footer>
     </div>
   );
 };
