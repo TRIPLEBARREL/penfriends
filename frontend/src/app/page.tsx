@@ -1,4 +1,5 @@
 import Letter from "./feat/letter";
+import Envelopes from "./feat/envelopes";
 
 export default function Home() {
   return (
@@ -13,11 +14,11 @@ export default function Home() {
             PENFRIENDS
           </h1>
         </div>
-        <div className={`h-screen`}>
-          {/* <div className={`inbox`}>
+        <div className={`h-screen grid grid-cols-2`}>
+          <div className={`inbox`}>
             <h2 className={`text-center font-extrabold m-5 mb-10`}>INBOX</h2>
             <Envelopes />
-          </div> */}
+          </div>
           <div className={`letter flex flex-col items-center`}>
             <div className={`letter-container`}>
               <Letter />
