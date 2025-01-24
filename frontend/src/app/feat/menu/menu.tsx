@@ -29,7 +29,7 @@ const Menu = () => {
   // Toggle menu open/close
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Menu options // DOUBLE CHECK ROUTES !!!
+  // Menu options
   const menuOptions = [
     { label: "Create Letter", path: "/create-letter" },
     { label: "Your Letters", path: "/your-letters" },
