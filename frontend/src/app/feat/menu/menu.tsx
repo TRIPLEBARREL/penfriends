@@ -4,12 +4,13 @@
 // make hamubrger menu icon increase in size when hovered
 
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   // function to handle when users click outside menu
   // useEffect with no dependencies means add listener on menu open and remove on close
@@ -90,7 +91,7 @@ const Menu = () => {
               key={option.label}
               className={`relative text-white font-extrabold cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-300 ${
                 // focus for keyboard accessibility
-                selectedOption === option
+                pathname === option.path
                   ? "text-yellow-300 px-4 py-2"
                   : "hover:text-yellow-200 px-4 py-2"
               }`}
@@ -100,7 +101,6 @@ const Menu = () => {
                 minHeight: "3rem", // min height for touch targets
               }}
               onClick={() => {
-                setSelectedOption(option);
                 setIsOpen(false);
                 router.push(option.path);
               }}
