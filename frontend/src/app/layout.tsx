@@ -58,14 +58,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
-        style={{
-          // Optional inline styles for fallback
-          background:
-            "linear-gradient(180deg, rgba(253, 246, 186, 1) 0%, rgba(255, 222, 126, 1) 100%)",
-        }}
+        className={`${geistSans.variable} ${geistMono.variable} ${andika.variable} ${bioRhyme.variable} ${dotGothic16.variable} antialiased`}
       >
-        <Menu />
+        <header>
+          <Menu />
+        </header>
         {children}
       </body>
     </html>
