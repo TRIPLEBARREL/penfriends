@@ -1,7 +1,6 @@
 "use client";
 
-// make responsive to diff screen sizes
-// make hamubrger menu icon increase in size when hovered
+// delete home emnu option
 
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -32,6 +31,7 @@ const Menu = () => {
 
   // Menu options
   const menuOptions = [
+    { label: "Home", path: "/" }, // DELETE THIS LATER
     { label: "Create Letter", path: "/create-letter" },
     { label: "Your Letters", path: "/your-letters" },
     { label: "Shop", path: "/shop" },

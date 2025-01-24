@@ -1,8 +1,9 @@
 "use client";
 
-// shop shelf design (ask jonno)
-// timer
-// header (global implementation?)
+// global: header?
+// shop: design, implement products and stickers, design timer and price
+// stickers: can reuse stickers on letters for sale stickers here
+// products: wait for real data
 
 import React from "react";
 
@@ -44,33 +45,32 @@ const ShopPage = () => {
   ];
 
   return (
-    <div className="bg-yellow-50 min-h-screen">
+    <div
+      className="min-h-screen"
+      style={{
+        fontFamily: "var(--font-bio-rhyme)", // Matches the global font family
+      }}
+    >
       {/* Header */}
       <header className="text-center py-6">
         <h1
-          className="text-4xl font-bold"
-          style={{ fontFamily: "var(--font-bio-rhyme)" }}
+          className="text-5xl font-bold" // Consistent with Penfriends title size
+          style={{ color: "#171717" }} // Matches foreground color
         >
           SHOP
         </h1>
         <p
-          className="text-lg mt-2"
-          style={{ fontFamily: "var(--font-bio-rhyme)" }}
+          className="text-2xl mt-2" // Slightly larger than default text for emphasis
+          style={{ color: "#171717" }} // Matches foreground color
         >
           REFRESHES IN 01:34
         </p>
       </header>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6 pb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-6 pb-10">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="flex flex-col items-center bg-transparent"
-            style={{
-              fontFamily: "var(--font-bio-rhyme)",
-            }}
-          >
+          <div key={product.id} className="flex flex-col items-center">
             {/* Product Image */}
             <div className="relative">
               <img
@@ -86,13 +86,21 @@ const ShopPage = () => {
             </div>
 
             {/* Product Name */}
-            <h2 className="text-xl font-bold mt-4 text-center">
+            <h2
+              className="text-2xl font-bold mt-4 text-center"
+              style={{ color: "#171717" }} // Matches foreground color
+            >
               {product.name}
             </h2>
 
             {/* Product Price */}
             <div className="text-center mt-2">
-              <span className="text-lg font-bold">{product.price} </span>
+              <span
+                className="text-xl font-bold"
+                style={{ color: "#171717" }} // Matches foreground color
+              >
+                {product.price}
+              </span>
               {product.originalPrice && (
                 <span className="text-gray-500 line-through text-sm ml-2">
                   {product.originalPrice}
@@ -105,8 +113,8 @@ const ShopPage = () => {
 
       {/* Footer */}
       <footer
-        className="text-center text-sm py-6"
-        style={{ fontFamily: "var(--font-bio-rhyme)" }}
+        className="text-center text-lg py-6"
+        style={{ color: "#171717" }} // Matches foreground color
       >
         TRIPLEBARREL
       </footer>
