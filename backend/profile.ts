@@ -13,10 +13,11 @@ function showProfile(email: string) {
   if (!user) {
     throw new Error("User not found!");
   }
-  const password: string = user.password;
+  const password: string = user.password || '';
   const name: string = user.name;
   return {
     email: email,
+    // we may not want to return the password in the future as we will implement encryption
     password: password,
     name: name
   };

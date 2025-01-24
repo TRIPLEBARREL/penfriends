@@ -78,7 +78,7 @@ function authRegister(email: string, password: string, name: string = ''): Error
       badges: []
     }
   };
-  fs.writeFileSync('./users.json', JSON.stringify(dataObj));
+  fs.writeFileSync('./users.json', JSON.stringify(dataObj, null, '\t'));
 
   return {
     id: id,

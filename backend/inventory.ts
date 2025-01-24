@@ -1,22 +1,35 @@
-import data from './database.json' with { type: "json" };
 import fs from 'fs';
+import { getUser } from './helper';
+import { Inventory, InventoryItem, User, UsersDB } from './types';
 
-function getPurchasedBackgrounds(email: string): string[] {
-  const dataObj = JSON.parse(fs.readFileSync('./database.json', {encoding: 'utf8'}));
-  const user = dataObj.filter((user) => user.email === email);
+function getPurchasedBackgrounds(email: string): InventoryItem[] {
+  const user: User = getUser(email);
   return user.inventory.backgrounds;
 }
 
-function getPurchasedStickers(email: string): string[] {
-  const dataObj = JSON.parse(fs.readFileSync('./database.json', {encoding: 'utf8'}));
-  const user = dataObj.filter((user) => user.email === email);
+function getPurchasedStickers(email: string): InventoryItem[] {
+  const user: User = getUser(email);
   return user.inventory.stickers;
 }
 
-function showInventory(email: string): string[] {
-  const dataObj = JSON.parse(fs.readFileSync('./database.json', {encoding: 'utf8'}));
-  const user = dataObj.filter((user) => user.email === email);
+function getPurchasedBadges(email: string): InventoryItem[] {
+  const user: User = getUser(email);
+  return user.inventory.badges;
+}
+
+function showInventory(email: string): Inventory {
+  const user: User = getUser(email);
   return user.inventory;
 }
 
-export { getPurchasedBackgrounds, getPurchasedStickers, showInventory };
+function removeInventoryItem(email: string, type: keyof Inventory, itemId: string): void {
+  const userDatabaseObj: UsersDB = JSON.parse(fs.readFileSync('./users.json', {encoding: 'utf8'}));
+  const user: User = userDatabaseObj[email];
+  const uInventory: Inventory = user.inventory;
+  uInventory[type] = uInventory[type].filter((item: InventoryItem) => item.id !== itemId);
+  user.inventory = uInventory;
+  userDatabaseObj[email] = user;
+  fs.writeFileSync('./users.json', JSON.stringify(userDatabaseObj), {encoding: 'utf8'});
+}
+
+export { getPurchasedBackgrounds, getPurchasedStickers, getPurchasedBadges, showInventory, removeInventoryItem };
