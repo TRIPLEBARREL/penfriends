@@ -15,7 +15,7 @@ export default function Home() {
           </h1>
         </div>
         <div className={`h-screen grid grid-cols-2`}>
-          <div className={`inbox`}>
+          <div className={`flex inbox flex-col items-center`}>
             <h2 className={`text-center font-extrabold m-5 mb-10`}>INBOX</h2>
             <Envelopes />
           </div>

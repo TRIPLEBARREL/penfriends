@@ -2,9 +2,7 @@ import Envelope from "./components/envelope";
 
 export default function Envelopes() {
   return (
-    <div
-      className={`grid grid-cols-1 relative justify-items-center lg:scale-80`}
-    >
+    <div className={`flex flex-col w-min mt-20`}>
       <Envelope />
       <Envelope />
       <Envelope />

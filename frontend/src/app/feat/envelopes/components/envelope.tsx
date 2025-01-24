@@ -9,10 +9,22 @@ export interface Envelope {
 export default function Envelope() {
   return (
     <div
-      className={`[&:nth-child(3n-1)]:-rotate-2 [&:nth-child(3n)]:rotate-2 top-40 hover:z-10`}
+      className={`
+        rotate-[0.4deg]
+        [&:nth-child(3n-1)]:-rotate-2
+        [&:nth-child(3n-1)]:-mx-3
+        [&:nth-child(3n)]:rotate-2
+        [&:nth-child(3n)]:mx-3
+        hover:mb-24
+        hover:scale-105
+        hover:z-10
+        transform
+        ease-out
+        duration-200
+        -my-14`}
     >
       <div
-        className={`bg-gradient-to-b from-white to-stone-100 shadow-xl hover:scale-105 transform transition ease-out duration-200 font-sans select-none w-full h-72 aspect-[2/1] p-10`}
+        className={`bg-gradient-to-b from-white to-stone-100 shadow-xl transform ease-out duration-100 font-sans select-none max-w-xl h-72 aspect-[2/1] p-10`}
       >
         <div className={`h-full content-center opacity-95`}>
           <div className={`grid col-span-1 font-slab opacity-90`}>
@@ -21,7 +33,7 @@ export default function Envelope() {
           </div>
         </div>
         <div
-          className={`absolute top-3 right-3 flex items-center w-full justify-end`}
+          className={`absolute top-3 right-3 flex items-center w-full justify-end pointer-events-none`}
         >
           <Image
             src={`/stamps/1.png`}
