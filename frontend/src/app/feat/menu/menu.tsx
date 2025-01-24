@@ -46,7 +46,7 @@ const Menu = () => {
       {/* Hamburger Button */}
       <button
         onClick={toggleMenu}
-        className="fixed top-10 left-10 z-50 sm:h-6 sm:w-6 md:h-8 md:w-8 lg:h-10 lg:w-10 flex flex-col justify-between items-center hover:scale-125 transition-transform duration-300"
+        className="z-50 sm:h-6 sm:w-6 md:h-8 md:w-8 lg:h-10 lg:w-10 flex flex-col justify-between items-center hover:scale-125 transition-transform duration-300"
         aria-label="Open Menu" // alt text
       >
         <span className="block sm:h-1 md:h-1.5 lg:h-2 w-full bg-black rounded-xl"></span>
