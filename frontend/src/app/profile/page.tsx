@@ -1,19 +1,76 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Form from "next/form";
 // import { User } from "../types";
 
-export default function ProfilePage() {
-  const [profileInfo, setProfileInfo] = useState(null);
-  const [editMode, setEditMode] = useState(false);
+interface ProfileInfo {
+  name: string;
+  email: string;
+  password: string;
+}
 
-  // useEffect(() => {
-  //   fetch("localhost:3000/profile")
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     setProfileInfo(data);
-  //   });
-  // }, []);
+export default function ProfilePage() {
+  const [profileInfo, setProfileInfo] = useState({
+    name: "Your Name",
+    email: "Your Email",
+  });
+  const [editMode, setEditMode] = useState(false);
+  const [editInfo, setEditInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    // fetch("localhost:3000/profile")
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   setProfileInfo({
+    //     name: data.name,
+    //     email: data.email,
+    //   }); 
+    // });
+  }, []);
+
+  const goToEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // fetch("localhost:3000/profile")
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   setProfileInfo(data);
+    //   setEditInfo({
+    //     name: profileInfo.name,
+    //     email: profileInfo.email,
+    //     password: data.password,
+    //   });
+    // });
+    
+    setEditMode(true);
+  }
+
+  const handleEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const name = event.target.name;
+    const value = event.target.value;
+
+    // const editInfoCopy: ProfileInfo = editInfo
+    setEditInfo(values => ({...values, [name]: value}))
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setEditInfo({
+      name: "",
+      email: "",
+      password: "",
+    });
+    setProfileInfo({
+      name: editInfo.name,
+      email: editInfo.email,
+    });
+
+    setEditMode(false);
+  }
   
   return (
     <div
@@ -28,7 +85,7 @@ export default function ProfilePage() {
         className="m-10 gap-3"
       >
         <h1 className="text-4xl font-bold">Profile</h1>
-        <line x1="0" y1="0" x2="70" y2="0" className="stroke-black stroke-2" />
+        <hr className="w-100 bg-black test-black h-0.5"/>
       </div>
       <div
         className="flex flex-row items-start justify-center gap-10 grow"
@@ -38,19 +95,19 @@ export default function ProfilePage() {
           alt="Profile Picture"
           className="h-20 w-20 bg-cover object-cover rounded-full relative"
         />
-        {!editMode ? (
+        {editMode ? (
           <div
             className="grow-7 gap-4 flex flex-col items-start justify-center"
           >
             <h2
               className="text-2xl font-bold 3rem"
             >
-              John Doe
+              {profileInfo.name}
             </h2>
             <h3
               className="text-lg font-light 2rem"
             >
-              damon.k.crowley@gmail.com
+              {profileInfo.email}
             </h3>
             <button
               className="w-100 h-50 bg-[#824670] hover:bg-[#824670] text-[#fdf6ba] font-bold py-2 px-4 rounded"
@@ -61,24 +118,23 @@ export default function ProfilePage() {
           </div>
         ) : (
           <div>
-            <form>
-              <label>
-                Name:
-                <input type="text" name="name" />
+            <form className="flex flex-col items-start justify-center gap-4" onSubmit={handleSubmit}>
+              <label className="flex flex-row gap-2 items-center">
+                <p>Name:</p>
+                <input className="p-2" type="text" name="name-input" placeholder={profileInfo.name} onChange={handleEdit}/>
               </label>
-              <label>
-                Email:
-                <input type="text" name="email" />
+              <label className="flex flex-row gap-2 items-center">
+                <p>Email:</p>
+                <input className="p-2" type="text" name="email-input" placeholder={profileInfo.email} onChange={handleEdit}/>
               </label>
-              <label>
-                Password:
-                <input type="text" name="email" />
+              <label className="flex flex-row gap-2 items-center">
+                <p>Password:</p>
+                <input className="p-2" type="password" name="password-input" onChange={handleEdit}/>
               </label>
-              <input type="submit" value="Submit" onClick={() => {setEditMode(false)}}/>
+              <input className="w-100 h-50 bg-[#824670] hover:bg-[#824670] text-[#fdf6ba] font-bold py-2 px-4 rounded" type="submit" value="Submit"/>
             </form>
           </div>
         )}
-        
       </div>
     </div>
   );
