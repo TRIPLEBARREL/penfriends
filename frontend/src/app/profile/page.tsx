@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Form from "next/form";
+import { profile } from "console";
 // import { User } from "../types";
 
 interface ProfileInfo {
@@ -31,42 +32,70 @@ export default function ProfilePage() {
     //     email: data.email,
     //   }); 
     // });
+    setProfileInfo({
+      name: "John Doe",
+      email: "john.doe@gmail.com",
+    })
   }, []);
 
-  const goToEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    console.log(profileInfo);
+  },[profileInfo]);
+
+  const goToEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     // fetch("localhost:3000/profile")
     // .then((res) => res.json())
     // .then((data) => {
     //   setProfileInfo(data);
-    //   setEditInfo({
-    //     name: profileInfo.name,
-    //     email: profileInfo.email,
-    //     password: data.password,
-    //   });
+      // setEditInfo({
+      //   name: profileInfo.name,
+      //   email: profileInfo.email,
+      //   password: data.password,
+      // });
     // });
-    
+
+    // call password from backend
+
+    setEditInfo({
+      name: profileInfo.name,
+      email: profileInfo.email,
+      password: "123456",
+    });
+
     setEditMode(true);
   }
 
   const handleEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    const name = event.target.name;
+    const name = event.target.name.split("-")[0];
     const value = event.target.value;
 
-    // const editInfoCopy: ProfileInfo = editInfo
     setEditInfo(values => ({...values, [name]: value}))
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(editInfo.password)
+    if (editInfo.password === "") {
+      alert("Please enter your password to save changes.");
+      return;
+    }
+    if (editInfo.name === "") {
+      editInfo.name = profileInfo.name;
+    }
+    if (editInfo.email === "") {
+      editInfo.email = profileInfo.email;
+    }
+    
+    setProfileInfo({
+      name: editInfo.name,
+      email: editInfo.email,
+    });
     setEditInfo({
       name: "",
       email: "",
       password: "",
-    });
-    setProfileInfo({
-      name: editInfo.name,
-      email: editInfo.email,
     });
 
     setEditMode(false);
@@ -95,7 +124,7 @@ export default function ProfilePage() {
           alt="Profile Picture"
           className="h-20 w-20 bg-cover object-cover rounded-full relative"
         />
-        {editMode ? (
+        {!editMode ? (
           <div
             className="grow-7 gap-4 flex flex-col items-start justify-center"
           >
@@ -111,7 +140,7 @@ export default function ProfilePage() {
             </h3>
             <button
               className="w-100 h-50 bg-[#824670] hover:bg-[#824670] text-[#fdf6ba] font-bold py-2 px-4 rounded"
-              onClick={() => setEditMode(true)}
+              onClick={goToEdit}
             >
               Edit Profile
             </button>
