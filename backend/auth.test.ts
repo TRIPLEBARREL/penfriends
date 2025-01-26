@@ -233,6 +233,6 @@ describe('unit auth password strength', () => {
   })
 
   test('no numbers', () => {
-    expect(() => { authRegister('tavish.f.degroot@gmail.com', 'IFuckingHateNu--ers', 'Tavish') }).toThrow('Password must contain at least one number!');
+    expect(() => { authRegister('tavish.f.degroot@gmail.com', 'Nonumbersoverhere', 'Tavish') }).toThrow('Password must contain at least one number!');
   })
 })
