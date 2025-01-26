@@ -65,14 +65,6 @@ export default function RootLayout({
           {/* Hamburger Menu */}
           <Menu />
           {/* Title */}
-          <div className="flex items-center justify-center">
-            <h1
-              className="title text-center font-extrabold text-base sm:text-xl lg:text-2xl"
-              style={{ fontFamily: "var(--font-bio-rhyme)" }}
-            >
-              PENFRIENDS
-            </h1>
-          </div>
           {/* Account Icon */}
           <div className="flex items-center">
             <img
