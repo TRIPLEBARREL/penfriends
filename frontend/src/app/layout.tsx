@@ -76,7 +76,7 @@ export default function RootLayout({
           {/* Account Icon */}
           <div className="flex items-center">
             <img
-              src="/assets/account.png"
+              src="/assets/test.png"
               alt="Account"
               className="w-10 h-10 rounded-full cursor-pointer hover:scale-125 transition-transform duration-300"
             />
