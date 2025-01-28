@@ -76,7 +76,7 @@ const ShopPage = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="rounded-md shadow-md w-48 h-32 object-cover"
+                className="rounded-md shadow-md w-300 h-30 object-cover"
               />
               {product.isOnSale && (
                 <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -85,6 +85,9 @@ const ShopPage = () => {
               )}
             </div>
 
+            {/* Shelf */}
+            <img src="/shelf.png" alt="shelf image" className="w-400 h-40" />
+
             {/* Product Name */}
             <h2
               className="text-2xl font-bold mt-4 text-center"
@@ -92,13 +95,6 @@ const ShopPage = () => {
             >
               {product.name}
             </h2>
-
-            {/* Shelf */}
-            <img
-              src="/shelf.png"
-              alt="Account"
-              className="w-10 h-10 rounded-full cursor-pointer hover:scale-125 transition-transform duration-300"
-            />
 
             {/* Product Price */}
             <div className="text-center mt-2">
