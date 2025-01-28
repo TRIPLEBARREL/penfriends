@@ -4,13 +4,6 @@
         "password": "123456",
         "name": "John Doe",
         "coins": 1000,
-        "draftLetters": [
-            {
-                "id": "l-6",
-                "title": "Letter 6",
-                "content": "Content 6"
-            }
-        ],
         "letters": {
             "new": [
                 {
@@ -39,6 +32,16 @@
                     "author": "user-4",
                     "replied-id": null
                 }
+            ],
+            "draft": [
+              {
+                "id": "l-6",
+                "title": "Letter 6",
+                "content": "Content 6",
+                "date": "2021-02-03",
+                "author": "user-1",
+                "replied-id": null
+              }
             ],
             "sent": [
                 {

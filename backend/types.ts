@@ -4,9 +4,8 @@ export interface User {
   password?: string;
   name: string;
   coins: number;
-  draftLetters: DraftLetter[];
   letters: {
-      // draft: Letter[]
+      draft: Letter[]
       new: Letter[];
       opened: Letter[];
       sent: Letter[];

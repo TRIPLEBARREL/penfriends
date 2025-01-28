@@ -30,4 +30,13 @@ function getSentLetters(email: string): Letter[] {
     return sentLetters;
 }
 
-export { getNewLetters, getOldLetters, getSentLetters };
+function getDraftLetters(email: string): Letter[] {
+  if (!(email in users)) {
+      throw new Error("User not found!");
+  } 
+
+  const draftLetters = users[email].letters.draft;
+  return draftLetters;
+}
+
+export { getNewLetters, getOldLetters, getSentLetters, getDraftLetters };

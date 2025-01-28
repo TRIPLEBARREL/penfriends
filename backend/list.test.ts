@@ -1,6 +1,6 @@
 import { describe, test, expect, afterEach } from '@jest/globals';
 import { Letter } from './types';
-import { getNewLetters, getOldLetters, getSentLetters } from './list';
+import { getNewLetters, getOldLetters, getSentLetters, getDraftLetters } from './list';
 
 describe('Get letters no errors', () => {
 
@@ -64,6 +64,21 @@ describe('Get letters no errors', () => {
 
     expect(getSentLetters("john.doe@gmail.com")).toStrictEqual(result)
   })
+  
+  test('Get draft letters', () => {
+    const result: Letter[] = [
+      {
+        "id": "l-6",
+        "title": "Letter 6",
+        "content": "Content 6",
+        "date": "2021-02-03",
+        "author": "user-1",
+        "replied-id": null
+      }
+    ]
+
+    expect(getDraftLetters("john.doe@gmail.com")).toStrictEqual(result)
+  })
 
 })
 
@@ -78,5 +93,9 @@ describe('Error testing', () => {
 
   test('Invalid/nonexistent email get sent letters', () => {
     expect(() => { getSentLetters("idontexistinthedatabase@hotmail.com") }).toThrow("User not found!")
+  })
+
+  test('Invalid/nonexistent email get draft letters', () => {
+    expect(() => { getDraftLetters("idontexistinthedatabase@hotmail.com") }).toThrow("User not found!")
   })
 })

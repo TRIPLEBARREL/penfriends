@@ -1,5 +1,5 @@
 const express = require('express');
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 const cors = require('cors');
 const morgan = require('morgan');
 const jwt = require('jsonwebtoken');
@@ -36,6 +36,7 @@ import {
   authResetPassword
 } from './auth';
 import { verifyToken } from './helper';
+import { Inventory } from './types';
 
 // Set up web app
 const app = express();
@@ -63,10 +64,11 @@ app.get('/letter/open', (req: Request, res: Response) => {
   return res.status(200).send(JSON.stringify(getLetterDetails(email as string, letterId)));
 });
 
-app.post('/letter/create', (req: Request, res: Response) => {
+app.post('/letter/create', (req: Request, res: Response, next: NextFunction) => {
   // creates empty letter
   const token = req.headers['token'] as string;
   const resObj = verifyToken(token)
+  // const resObj = verifyToken(token, next)
   if (resObj.code !== 200) {
     return res.status(resObj.code).json({ error: resObj.message && "Error!" });
   }
@@ -184,7 +186,7 @@ app.post('/shop/purchase', (req: Request, res: Response) => {
   }
 
   const { itemId, cost, type, email } = req.body;
-  return res.status(200).json(purchaseItem(email as string, itemId as string, type as string, parseInt(cost)));
+  return res.status(200).json(purchaseItem(email as string, itemId as string, type as keyof Inventory));
 });
 
 app.get('/inventory/backgrounds', (req: Request, res: Response) => {
