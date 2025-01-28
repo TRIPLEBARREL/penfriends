@@ -93,6 +93,13 @@ const ShopPage = () => {
               {product.name}
             </h2>
 
+            {/* Shelf */}
+            <img
+              src="/shelf.png"
+              alt="Account"
+              className="w-10 h-10 rounded-full cursor-pointer hover:scale-125 transition-transform duration-300"
+            />
+
             {/* Product Price */}
             <div className="text-center mt-2">
               <span
