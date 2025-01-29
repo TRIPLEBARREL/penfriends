@@ -67,7 +67,7 @@ export default function RootLayout({
           {/* Title */}
           <div className="flex items-center justify-center">
             <h1
-              className="title text-center font-extrabold text-base sm:text-xl lg:text-2xl"
+              className="title text-center font-extrabold text-base sm:text-xl lg:text-3xl underline"
               style={{ fontFamily: "var(--font-bio-rhyme)" }}
             >
               PENFRIENDS

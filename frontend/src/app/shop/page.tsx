@@ -35,21 +35,21 @@ const ShopPage = () => {
 
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen" // pg takes at least full view port height
       style={{
-        fontFamily: "var(--font-bio-rhyme)", // Matches the global font family
+        fontFamily: "var(--font-bio-rhyme)",
       }}
     >
       {/* Header */}
-      <header className="text-center py-6">
+      <header className="text-center py-10">
         <h1
-          className="text-5xl font-bold" // Consistent with Penfriends title size
+          className="font-bold sm:text-1.5xl lg:text-2xl" // Consistent with Penfriends title size
           style={{ color: "#171717" }} // Matches foreground color
         >
           SHOP
         </h1>
         <p
-          className="text-2xl mt-2" // Slightly larger than default text for emphasis
+          className="font-bold sm:text-1xl lg:text-1.5xl mt-2" // Slightly larger than default text for emphasis
           style={{ color: "#171717" }} // Matches foreground color
         >
           REFRESHES IN 01:34
