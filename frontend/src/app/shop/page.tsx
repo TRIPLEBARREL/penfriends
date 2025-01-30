@@ -49,62 +49,66 @@ const ShopPage = () => {
           SHOP
         </h1>
         <p
-          className="font-bold sm:text-1xl lg:text-1.5xl mt-2" // Slightly larger than default text for emphasis
+          className="font-bold sm:text-1xl lg:text-1.5xl mt-2" // top margin 2
           style={{ color: "#171717" }} // Matches foreground color
         >
           REFRESHES IN 01:34
         </p>
       </header>
 
-      {/* Product Grid */}
+      {/* Product Grid: grid layout: small screens only 1 col + 8 gap between grid + horiz and bot padding */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 px-6 pb-10">
-        {products.map((product) => (
-          <div key={product.id} className="flex flex-col items-center">
-            {/* Product Image */}
-            <div className="relative">
+        {products.map(
+          (
+            product // (below): product elements aligned in col center
+          ) => (
+            <div key={product.id} className="flex flex-col items-center">
+              {/* Product Image */}
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="rounded-md shadow-md w-[300px] h-[30px] object-cover z50" // img maintains ratio
+                />
+                {product.isOnSale && (
+                  <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    SALE!
+                  </div>
+                )}
+              </div>
+
+              {/* Shelf */}
               <img
-                src={product.image}
-                alt={product.name}
-                className="rounded-md shadow-md w-300 h-30 object-cover z50"
+                src="/shelf.png"
+                alt="shelf image"
+                className="w-400 h-40 z30"
               />
-              {product.isOnSale && (
-                <div className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                  SALE!
-                </div>
-              )}
-            </div>
 
-            {/* Shelf */}
-            <img
-              src="/shelf.png"
-              alt="shelf image"
-              className="w-400 h-40 z30"
-            />
-
-            {/* Product Name */}
-            <h2
-              className="text-2xl font-bold mt-4 text-center"
-              style={{ color: "#171717" }} // Matches foreground color
-            >
-              {product.name}
-            </h2>
-
-            {/* Product Price */}
-            <div className="text-center mt-2">
-              <span
-                className="text-xl font-bold"
-                style={{ color: "#171717" }} // Matches foreground color
+              {/* Product Name */}
+              <h2
+                className="text-2xl font-bold mt-4 text-center"
+                style={{ color: "#171717" }}
               >
-                {product.price}
-              </span>
-              {product.originalPrice && (
-                <span className="text-gray-500 line-through text-sm ml-2">
-                  {product.originalPrice}
+                {product.name}
+              </h2>
+
+              {/* Product Price */}
+              <div className="text-center mt-2">
+                <span
+                  className="text-xl font-bold"
+                  style={{ color: "#171717" }}
+                >
+                  {product.price}
                 </span>
-              )}
+                {product.originalPrice && (
+                  <span className="text-gray-500 line-through text-sm ml-2">
+                    {product.originalPrice}
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
 
       {/* Footer */}
