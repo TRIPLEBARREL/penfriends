@@ -60,7 +60,30 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${andika.variable} ${bioRhyme.variable} ${dotGothic16.variable} antialiased`}
       >
-        <Menu />
+        {/* Global Header */}
+        <header className="flex justify-between items-center px-6 py-10 h-10 bg-">
+          {/* Hamburger Menu */}
+          <Menu />
+          {/* Title */}
+          <div className="flex items-center justify-center">
+            <h1
+              className="title text-center font-extrabold text-base sm:text-xl lg:text-3xl underline"
+              style={{ fontFamily: "var(--font-bio-rhyme)" }}
+            >
+              PENFRIENDS
+            </h1>
+          </div>
+          {/* Account Icon */}
+          <div className="flex items-center">
+            <img
+              src="/account.png"
+              alt="Account"
+              className="w-10 h-10 rounded-full cursor-pointer hover:scale-125 transition-transform duration-300"
+            />
+          </div>
+        </header>
+
+        {/* Page Content */}
         {children}
       </body>
     </html>
