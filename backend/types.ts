@@ -4,12 +4,7 @@ export interface User {
   password?: string;
   name: string;
   coins: number;
-  letters: {
-      draft: Letter[]
-      new: Letter[];
-      opened: Letter[];
-      sent: Letter[];
-  };
+  letters: LetterType;
   inventory: Inventory;
 }
 
@@ -35,16 +30,23 @@ export interface Letter {
   "replied-id": string | null;
 }
 
-export interface DraftLetter {
+/* export interface DraftLetter {
   id: string;
   title: string;
   content: string;
-}
+} */
 
 export interface Inventory {
   backgrounds: InventoryItem[];
   stickers: InventoryItem[];
   badges: InventoryItem[];
+}
+
+export interface LetterType {
+  new: Letter[];
+  opened: Letter[];
+  draft: Letter[];
+  sent: Letter[];
 }
 
 export interface InventoryItem {
