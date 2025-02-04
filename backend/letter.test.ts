@@ -94,7 +94,6 @@ describe('Letter feature no error', () => {
 
  describe('Letter feature error', () => {
     beforeEach(() => {
-        resetDatabase();
         const resultAuth = authRegister('tavish.f.degroot@gmail.com', 'Aar432!nxaJdd', 'Tavish')
             if (resultAuth instanceof Error) {
             throw resultAuth;

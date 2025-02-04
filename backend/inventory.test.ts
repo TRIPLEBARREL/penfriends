@@ -1,5 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import { getPurchasedBackgrounds, getPurchasedStickers, getPurchasedBadges, showInventory } from './inventory';
+import { resetDatabase } from './helper';
 
 describe('receiving user info', () => {
   test('get user backgrounds', () => {
@@ -21,4 +22,8 @@ describe('receiving user info', () => {
       badges: [{"id":"bd-1","name":"Badge 1","price":150},{"id":"bd-2","name":"Badge 2","price":250}]
     })
   });
+
+  afterEach(() => {
+    resetDatabase();
+  })
 });

@@ -2,6 +2,7 @@ import { describe, test, expect, afterEach } from '@jest/globals';
 import { purchaseItem, showShopItems, addShopItem } from './shop';
 import { showInventory, removeInventoryItem } from './inventory';
 import { InventoryItem } from './types';
+import { resetDatabase } from './helper';
 
 describe('buying from shop', () => {
   test('get shop stock, fully stocked, then remove item from user', () => {
@@ -24,5 +25,9 @@ describe('buying from shop', () => {
       stickers: [{"id":"s-1","name":"Sticker 1","price":50},{"id":"s-2","name":"Sticker 2","price":75}],
       badges: [{"id":"bd-1","name":"Badge 1","price":150},{"id":"bd-2","name":"Badge 2","price":250}]
     });
+  });
+
+  afterEach(() => {
+    resetDatabase();
   });
 });

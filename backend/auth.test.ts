@@ -2,6 +2,7 @@
 import { describe, test, expect, afterEach } from '@jest/globals';
 import { authLogin, authRegister, authResetPassword, removeUser } from "./auth"
 import { User } from './types'
+import { resetDatabase } from './helper';
 
 // test('npm syntax test', () => {
 //   expect(1).toBe(1)
@@ -36,14 +37,17 @@ describe('unit auth no error', () => {
       "id":"user-1",
       "name":"John Doe",
       "coins":1000,
-      "draftLetters":[
-        {
-          "id":"l-6",
-          "title":"Letter 6",
-          "content":"Content 6"
-        }
-      ],
       "letters":{
+        "draft":[
+          {
+            "author": "user-1",
+            "date": "2021-02-03",
+            "id":"l-6",
+            "title":"Letter 6",
+            "replied-id": null,
+            "content":"Content 6"
+          }
+        ],
         "new":[
           {
             "id":"l-1",
@@ -169,7 +173,7 @@ describe('unit auth no error', () => {
 
   afterEach(() => {
     // clear database
-    removeUser('tavish.f.degroot@gmail.com')
+    resetDatabase();
   })
 })
 
@@ -217,6 +221,9 @@ describe('unit auth error checking', () => {
       expect(() => { authResetPassword('john.doe@gmail.com', '7') }).toThrow('Password must be at least 12 characters long!');
     })
   })
+  afterEach(() => {
+    resetDatabase();
+  })
 })
 
 describe('unit auth password strength', () => {
@@ -234,5 +241,9 @@ describe('unit auth password strength', () => {
 
   test('no numbers', () => {
     expect(() => { authRegister('tavish.f.degroot@gmail.com', 'Nonumbersoverhere', 'Tavish') }).toThrow('Password must contain at least one number!');
+  })
+  
+  afterEach(() => {
+    resetDatabase();
   })
 })
